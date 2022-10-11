@@ -8,7 +8,6 @@ import json
 import unittest
 from datetime import datetime, timedelta  # lint-amnesty, pylint: disable=unused-import
 from unittest.mock import patch
-from cms.envs.common import FEATURES
 
 import ddt
 import pytz
@@ -17,7 +16,6 @@ from django.conf import settings
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.utils.timezone import now
-from lms.djangoapps.learner_home.waffle import ENABLE_LEARNER_HOME_MFE
 from milestones.tests.utils import MilestonesTestCaseMixin
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
