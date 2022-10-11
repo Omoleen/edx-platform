@@ -8,6 +8,7 @@ import json
 import unittest
 from datetime import datetime, timedelta  # lint-amnesty, pylint: disable=unused-import
 from unittest.mock import patch
+from cms.envs.common import FEATURES
 
 import ddt
 import pytz
@@ -16,6 +17,7 @@ from django.conf import settings
 from django.test.utils import override_settings
 from django.urls import reverse
 from django.utils.timezone import now
+from lms.djangoapps.learner_home.waffle import ENABLE_LEARNER_HOME_MFE
 from milestones.tests.utils import MilestonesTestCaseMixin
 from opaque_keys import InvalidKeyError
 from opaque_keys.edx.keys import CourseKey
@@ -234,6 +236,14 @@ class StudentDashboardTests(SharedModuleStoreTestCase, MilestonesTestCaseMixin, 
         UserProfile.objects.get(user=self.user).delete()
         response = self.client.get(self.path)
         self.assertRedirects(response, reverse('account_settings'))
+
+    def test_redirect_to_learner_home(self):
+        """
+        if learner home mfe is enabled, redirect to learner home mfe
+        """
+        with patch('lms.djangoapps.learner_home.waffle.ENABLE_LEARNER_HOME_MFE.is_enabled', return_value=True):
+            response = self.client.get(self.path)
+            self.assertRedirects(response, settings.LEARNER_HOME_MICROFRONTEND_URL, fetch_redirect_response=False)
 
     def test_course_cert_available_message_after_course_end(self):
         course_key = CourseKey.from_string('course-v1:edX+DemoX+Demo_Course')
