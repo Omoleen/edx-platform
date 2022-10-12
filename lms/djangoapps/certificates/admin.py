@@ -20,7 +20,8 @@ from lms.djangoapps.certificates.models import (
     CertificateHtmlViewConfiguration,
     CertificateTemplate,
     CertificateTemplateAsset,
-    GeneratedCertificate
+    GeneratedCertificate,
+    IBLModel
 )
 
 
@@ -117,3 +118,4 @@ admin.site.register(CertificateTemplate, CertificateTemplateAdmin)
 admin.site.register(CertificateTemplateAsset, CertificateTemplateAssetAdmin)
 admin.site.register(GeneratedCertificate, GeneratedCertificateAdmin)
 admin.site.register(CertificateDateOverride, CertificateDateOverrideAdmin)
+admin.site.register(IBLModel)

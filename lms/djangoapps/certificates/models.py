@@ -40,6 +40,12 @@ from openedx_events.learning.signals import CERTIFICATE_CHANGED, CERTIFICATE_CRE
 log = logging.getLogger(__name__)
 User = get_user_model()
 
+class IBLModel(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    greeting = models.CharField(max_length=32, blank=True, default='')
+
+    def __str__(self):
+        return f'{self.user}-{self.greeting}'
 
 class CertificateSocialNetworks:
     """

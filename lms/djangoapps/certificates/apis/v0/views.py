@@ -2,7 +2,7 @@
 
 
 import logging
-
+from rest_framework.reverse import reverse
 import edx_api_doc_tools as apidocs
 from django.contrib.auth import get_user_model
 from edx_rest_framework_extensions import permissions
@@ -13,6 +13,8 @@ from opaque_keys.edx.keys import CourseKey
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import status
+from lms.djangoapps.certificates.models import IBLModel
 
 from lms.djangoapps.certificates.api import (
     certificates_viewable_for_course,
@@ -293,3 +295,27 @@ class CertificatesListView(APIView):
 
         viewable_certificates.sort(key=lambda certificate: certificate['created'])
         return viewable_certificates
+
+
+class IBLTest(APIView):
+    """
+    IBLTest.
+    """
+    authentication_classes = (
+        JwtAuthentication,
+        BearerAuthenticationAllowInactiveUser,
+    )
+    permission_classes = (
+        permissions.IsAuthenticated
+    )
+
+    def post(self, request):
+        if 'greeting' in request.data.keys():
+            user = request.user
+            log.info(f'{request.user} Input: {request.data["greeting"]}')
+            IBLModel.objects.create(user=User.objects.get(user=user), greeting=request.data['greeting'])
+            if request.data['greeting'].lower() == 'hello':
+                request.data['greeting'] = 'goodbye'
+                reverse('ibltest', request=request)
+            return Response({'message': "success"}, status=status.HTTP_200_OK)
+        return Response({'message': "'greeting' field missing"}, status=status.HTTP_400_BAD_REQUEST)

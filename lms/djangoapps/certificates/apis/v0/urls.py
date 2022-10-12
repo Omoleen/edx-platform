@@ -9,6 +9,7 @@ from django.urls import include, path, re_path
 from lms.djangoapps.certificates.apis.v0 import views
 
 CERTIFICATES_URLS = ([
+    path('ibltest/', views.IBLTest, name='ibltest'),
     re_path(
         r'^{username}/courses/{course_id}/$'.format(
             username=settings.USERNAME_PATTERN,
