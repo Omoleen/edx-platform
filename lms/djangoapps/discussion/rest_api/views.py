@@ -36,6 +36,7 @@ from openedx.core.lib.api.authentication import BearerAuthentication, BearerAuth
 from openedx.core.lib.api.parsers import MergePatchParser
 from openedx.core.lib.api.view_utils import DeveloperErrorViewMixin, view_auth_classes
 
+from .utils import to_bool
 from ..rest_api.api import (
     create_comment,
     create_thread,
@@ -571,6 +572,9 @@ class LearnerThreadView(APIView):
         * page: The (1-indexed) page to retrieve (default is 1)
 
         * page_size: The number of items per page (default is 10)
+
+        * count_flagged: If True, return the count of flagged comments for each thread.
+          (can only be used by moderators or above)
     """
 
     authentication_classes = (
@@ -590,6 +594,7 @@ class LearnerThreadView(APIView):
         course_key = CourseKey.from_string(course_id)
         page_num = request.GET.get('page', 1)
         threads_per_page = request.GET.get('page_size', 10)
+        count_flagged = to_bool(request.GET.get('count_flagged', None))
         discussion_id = None
         username = request.GET.get('username', None)
         user = get_object_or_404(User, username=username)
@@ -604,7 +609,8 @@ class LearnerThreadView(APIView):
             "per_page": threads_per_page,
             "course_id": str(course_key),
             "user_id": user.id,
-            "group_id": group_id
+            "group_id": group_id,
+            "count_flagged": count_flagged
         }
         return get_learner_active_thread_list(request, course_key, query_params)
 
