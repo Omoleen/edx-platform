@@ -966,8 +966,8 @@ def update_assets(args):
     process_xmodule_assets()
     process_npm_assets()
 
-    # Build Webpack
-    call_task('pavelib.assets.webpack', options={'settings': args.settings})
+    # # Build Webpack
+    # call_task('pavelib.assets.webpack', options={'settings': args.settings})
 
     # Compile sass for themes and system
     execute_compile_sass(args)
