@@ -50,6 +50,7 @@ class IBLModel(models.Model):
     class Meta:
         app_label = "certificates"
 
+
 class CertificateSocialNetworks:
     """
     Enum for certificate social networks
