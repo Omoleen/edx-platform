@@ -1754,7 +1754,7 @@ INSTALLED_APPS = [
     # Blockstore
     'blockstore.apps.bundles',
 
-    'lms.djangoapps.certificates.apps.CertificatesConfig',
+    # 'lms.djangoapps.certificates.apps.CertificatesConfig',
 ]
 
 
