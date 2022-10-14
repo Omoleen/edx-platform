@@ -47,6 +47,9 @@ class IBLModel(models.Model):
     def __str__(self):
         return f'{self.user}-{self.greeting}'
 
+    class Meta:
+        app_label = "certificates"
+
 class CertificateSocialNetworks:
     """
     Enum for certificate social networks
