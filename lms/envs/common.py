@@ -1702,10 +1702,10 @@ CODE_JAIL_REST_SERVICE_READ_TIMEOUT = 3.5  # time in seconds
 # Change DEBUG in your environment settings files, not here
 DEBUG = False
 USE_TZ = True
-SESSION_COOKIE_SECURE = False
+# SESSION_COOKIE_SECURE = False
 SESSION_SAVE_EVERY_REQUEST = False
 SESSION_SERIALIZER = 'openedx.core.lib.session_serializers.PickleSerializer'
-SESSION_COOKIE_DOMAIN = ""
+# SESSION_COOKIE_DOMAIN = ""
 SESSION_COOKIE_NAME = 'sessionid'
 
 # django-session-cookie middleware
