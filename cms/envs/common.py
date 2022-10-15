@@ -1108,10 +1108,10 @@ CODE_JAIL_REST_SERVICE_READ_TIMEOUT = 3.5  # time in seconds
 ############################ DJANGO_BUILTINS ################################
 # Change DEBUG in your environment settings files, not here
 DEBUG = False
-SESSION_COOKIE_SECURE = False
+# SESSION_COOKIE_SECURE = False
 SESSION_SAVE_EVERY_REQUEST = False
 SESSION_SERIALIZER = 'openedx.core.lib.session_serializers.PickleSerializer'
-SESSION_COOKIE_DOMAIN = ""
+# SESSION_COOKIE_DOMAIN = ""
 SESSION_COOKIE_NAME = 'sessionid'
 
 # This is the domain that is used to set shared cookies between various sub-domains.
