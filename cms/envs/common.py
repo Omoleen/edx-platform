@@ -1111,7 +1111,7 @@ DEBUG = False
 SESSION_COOKIE_SECURE = False
 SESSION_SAVE_EVERY_REQUEST = False
 SESSION_SERIALIZER = 'openedx.core.lib.session_serializers.PickleSerializer'
-SESSION_COOKIE_DOMAIN = "http://ec2-18-220-164-210.us-east-2.compute.amazonaws.com/"
+# SESSION_COOKIE_DOMAIN = ""
 SESSION_COOKIE_NAME = 'sessionid'
 
 # This is the domain that is used to set shared cookies between various sub-domains.
